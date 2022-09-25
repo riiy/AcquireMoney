@@ -24,6 +24,7 @@ set(SOURCE_DIR
 )
 set(SOURCE
     ${SOURCE_DIR}/main.cpp
+    ${SOURCE_DIR}/eastmoney.cpp
 )
 
 
@@ -39,12 +40,18 @@ INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 find_package(Threads REQUIRED)
 #
 ### PostgreSQL
-find_package(PostgreSQL REQUIRED)
+# find_package(PostgreSQL REQUIRED)
 ### cpr http_client
 find_package(cpr REQUIRED)
 
+### json
+include(FetchContent)
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
+FetchContent_MakeAvailable(json)
+
 add_executable(${PROJECT_NAME} ${SOURCE})
-#
-target_link_libraries(${PROJECT_NAME} PRIVATE Boost::program_options PostgreSQL::PostgreSQL cpr::cpr)
+target_link_libraries(${PROJECT_NAME} PRIVATE Boost::program_options cpr::cpr nlohmann_json::nlohmann_json)
+
+## Test
 enable_testing()
 add_subdirectory(tests)

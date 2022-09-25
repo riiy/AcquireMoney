@@ -1,6 +1,10 @@
+#include "eastmoney.h"
 #include <cpr/cpr.h>
 #include <iostream>
+#include <nlohmann/json.hpp>
 #include <string>
+using json = nlohmann::json;
+using namespace std;
 
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb,
                             void *userp) {
@@ -9,10 +13,6 @@ static size_t WriteCallback(void *contents, size_t size, size_t nmemb,
 }
 
 int main(void) {
-  cpr::Response r = cpr::Get(
-      cpr::Url{"https://api.github.com/repos/whoshuu/cpr/contributors"},
-      cpr::Authentication{"user", "pass", cpr::AuthMode::BASIC},
-      cpr::Parameters{{"anon", "true"}, {"key", "value"}});
-  std::cout << r.text << std::endl;
+  get_stocks();
   return 0;
 }
