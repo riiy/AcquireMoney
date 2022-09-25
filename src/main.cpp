@@ -13,6 +13,9 @@ static size_t WriteCallback(void *contents, size_t size, size_t nmemb,
 }
 
 int main(void) {
-  get_stocks();
+  auto stocks = get_stocks();
+  for (auto &[key, value] : stocks.items()) {
+    std::cout << key << " : " << value << "\n";
+  }
   return 0;
 }
