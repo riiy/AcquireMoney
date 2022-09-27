@@ -24,7 +24,8 @@ set(SOURCE_DIR
 )
 set(SOURCE
     ${SOURCE_DIR}/main.cpp
-    ${SOURCE_DIR}/eastmoney.cpp
+    ${SOURCE_DIR}/get_stock_list.cpp
+    ${SOURCE_DIR}/get_stock_his.cpp
 )
 
 

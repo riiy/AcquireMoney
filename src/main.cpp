@@ -1,4 +1,4 @@
-#include "eastmoney.h"
+#include "get_stock_list.h"
 #include <boost/program_options.hpp>
 #include <iostream>
 using namespace std;
@@ -19,7 +19,7 @@ int main(int argc, const char *argv[]) {
   }
 
   if (vm.count("stock")) {
-    auto stocks = get_stocks();
+    auto stocks = get_stock_list();
     for (auto &[key, value] : stocks.items()) {
       if (vm["stock"].as<string>() == key)
         std::cout << key << " : " << value << "\n";

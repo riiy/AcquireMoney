@@ -1,13 +1,9 @@
-#include "eastmoney.h"
-#include <bits/stdc++.h>
-#include <cpr/cpr.h>
-#include <string>
-#include <vector>
+#include "get_stock_list.h"
 
 using json = nlohmann::json;
 using namespace std;
 
-json get_stocks() {
+json get_stock_list() {
   json data;
   vector<pair<string, string>> params = {
       {"北向资金",
