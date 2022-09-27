@@ -6,8 +6,8 @@ namespace po = boost::program_options;
 
 int main(int argc, const char *argv[]) {
   po::options_description desc("Allowed options");
-  desc.add_options()("help", "produce help message")(
-      "stock,S", po::value<string>(), "查找stock");
+  desc.add_options()("help,h", "produce help message")(
+      "stock,s", po::value<string>(), "查找stock");
 
   po::variables_map vm;
   po::store(po::parse_command_line(argc, argv, desc), vm);
