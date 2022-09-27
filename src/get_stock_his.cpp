@@ -3,8 +3,8 @@
 using json = nlohmann::json;
 using namespace std;
 
-json get_stock_his() {
+json get_stock_his(std::string stock) {
   json ret;
-  ret["ret"] = true;
+  ret["ret"] = stock;
   return ret;
 }
