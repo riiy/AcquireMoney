@@ -24,11 +24,12 @@ int main(int argc, const char *argv[]) {
     auto stocks = get_stock_list();
 
     auto &st = stocks[vm["stock"].as<string>()];
-    cout << std::get<0>(st) << endl;
-    // for (auto &[key, value] : stocks.items()) {
-    //   if (vm["stock"].as<string>() == key)
-    //     std::cout << key << " : " << value << "\n";
-    // }
+    auto chanel = std::get<2>(st);
+    cout << std::get<0>(st) << ": ";
+    for (unsigned j = 0; j < chanel.size(); j++) {
+      cout << chanel[j] << " ";
+    }
+    cout << endl;
   }
   if (vm.count("ta")) {
     auto stocks = get_stock_his(vm["ta"].as<string>());

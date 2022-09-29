@@ -326,7 +326,7 @@ stock_map get_stock_list() {
       for (auto &item : d["result"]["data"]) {
         auto &st = data[item["SECURITY_NAME_ABBR"]];
         std::get<0>(st) = item["SECURITY_NAME_ABBR"];
-        std::get<1>(st) = item["SECURITY_NAME_ABBR"];
+        std::get<1>(st) = item["SECUCODE"];
         std::get<2>(st).push_back(param.first);
       }
     }
