@@ -22,10 +22,13 @@ int main(int argc, const char *argv[]) {
 
   if (vm.count("stock")) {
     auto stocks = get_stock_list();
-    for (auto &[key, value] : stocks.items()) {
-      if (vm["stock"].as<string>() == key)
-        std::cout << key << " : " << value << "\n";
-    }
+
+    auto &st = stocks[vm["stock"].as<string>()];
+    cout << std::get<0>(st) << endl;
+    // for (auto &[key, value] : stocks.items()) {
+    //   if (vm["stock"].as<string>() == key)
+    //     std::cout << key << " : " << value << "\n";
+    // }
   }
   if (vm.count("ta")) {
     auto stocks = get_stock_his(vm["ta"].as<string>());
