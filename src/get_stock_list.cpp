@@ -2,6 +2,7 @@
 
 using json = nlohmann::json;
 using namespace std;
+using stock_list = std::vector<std::map<string, map<string, string>>>;
 
 json get_stock_list() {
   json data;

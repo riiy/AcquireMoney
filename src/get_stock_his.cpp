@@ -27,7 +27,7 @@ json get_stock_his(std::string stock) {
 
   auto s = r.text;
   std::string delimiter = "=";
-  regex re(",\\{.*?\\}");
+  regex re(",\\{\"nd.*?\\}");
   auto result = regex_replace(s, re, "$1");
   vector<string> v = split(result, delimiter);
   auto d = json::parse(v[1]);
