@@ -313,14 +313,25 @@ std::vector<std::pair<std::string, std::string>> params = {
 };
 stock_map get_stock_list() {
   stock_map data;
-  for (auto &param : params) {
-    auto r = cpr::Post(
-        cpr::Url{"https://datacenter.eastmoney.com/stock/"
-                 "selection/api/data/get/"},
-        cpr::Body(param.second),
-        cpr::Header{{"Content-Type",
-                     "multipart/form-data; boundary=----WebKitFormBoundary"}});
+  std::map<std::string, cpr::AsyncResponse> containers{};
 
+  cpr::Url url = cpr::Url{
+      "https://datacenter.eastmoney.com/stock/selection/api/data/get/"};
+  std::vector<std::shared_ptr<cpr::Session>> sessions;
+  for (auto &param : params) {
+    std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
+    session->SetUrl(url);
+    auto header =
+        cpr::Header({{"Content-Type",
+                      "multipart/form-data; boundary=----WebKitFormBoundary"}});
+    session->SetHeader(header);
+    session->SetBody(param.second);
+    std::string channel = param.first;
+    auto spa = session->PostAsync();
+    containers[channel] = std::move(spa);
+  }
+  for (auto &param : params) {
+    auto r = containers[param.first].get();
     auto d = json::parse(r.text);
     if (d["success"]) {
       for (auto &item : d["result"]["data"]) {
