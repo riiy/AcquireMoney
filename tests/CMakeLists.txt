@@ -19,3 +19,4 @@ target_link_libraries(
 
 include(GoogleTest)
 gtest_discover_tests(hello_test)
+add_test(hello_test hello_test)
