@@ -1,9 +1,10 @@
 #include "get_stock_his.h"
+#include <bits/stdc++.h>
+#include <cpr/cpr.h>
 
 using json = nlohmann::json;
 using namespace std;
 
-// for string delimiter
 vector<string> split(string s, string delimiter) {
   size_t pos_start = 0, pos_end, delim_len = delimiter.length();
   string token;
@@ -18,12 +19,14 @@ vector<string> split(string s, string delimiter) {
   res.push_back(s.substr(pos_start));
   return res;
 }
-json get_stock_his(std::string stock) {
+
+json get_stock_his(std::string stock_code = "sz300760") {
   json ret;
-  auto r =
-      cpr::Get(cpr::Url{"http://web.ifzq.gtimg.cn/appstock/app/fqkline/"
-                        "get?_var=kline_dayqfq2022&param=sz300760,day,2022-01-"
-                        "01,2023-12-31,640,qfq&r=0.52745640804514204"});
+  string url = "http://web.ifzq.gtimg.cn/appstock/app/fqkline/"
+               "get?_var=kline_dayqfq2022&param=" +
+               stock_code +
+               ",day,2022-01-01,2023-12-31,640,qfq&r=0.52745640804514204";
+  auto r = cpr::Get(cpr::Url{url});
 
   auto s = r.text;
   std::string delimiter = "=";
@@ -32,6 +35,6 @@ json get_stock_his(std::string stock) {
   vector<string> v = split(result, delimiter);
   auto d = json::parse(v[1]);
 
-  ret = d["data"]["sz300760"]["qfqday"];
+  ret = d["data"][stock_code]["qfqday"];
   return ret;
 }
