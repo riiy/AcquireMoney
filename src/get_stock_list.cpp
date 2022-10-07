@@ -1,5 +1,8 @@
 #include "get_stock_list.h"
+#include <cpr/cpr.h>
+#include <nlohmann/json.hpp>
 
+using json = nlohmann::json;
 using namespace std;
 
 stock_map get_stock_list() {
